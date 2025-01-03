@@ -551,17 +551,28 @@
             championApodoEl.textContent = `"${randomChampion.apodo}"`;
 
             itemsContainer.innerHTML = "";
+
             const randomBoots = items.boots[Math.floor(Math.random() * items.boots.length)];
             const availableLegendaryItems = [...items.legendary];
+
+            // Asegurar que haya suficientes ítems legendarios
+            if (availableLegendaryItems.length < 5) {
+                console.error("No hay suficientes ítems legendarios disponibles.");
+                return;
+            }
+
+            // Selecciona aleatoriamente 5 ítems legendarios
             const randomLegendaryItems = [];
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 5; i++) {
                 const randomIndex = Math.floor(Math.random() * availableLegendaryItems.length);
                 randomLegendaryItems.push(availableLegendaryItems.splice(randomIndex, 1)[0]);
             }
 
+            // Coloca las botas en la segunda posición
             const randomItems = [...randomLegendaryItems];
             randomItems.splice(1, 0, randomBoots);
 
+            // Asegurar que siempre se generen 6 ítems
             randomItems.forEach(item => {
                 const itemDiv = document.createElement("div");
                 itemDiv.className = "item";
