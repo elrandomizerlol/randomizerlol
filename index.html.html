@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEAGUE OF LEGENDS RANDOMIZER</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet"> <!-- Fuente Roboto Slab -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"> <!-- Nueva fuente -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif; /* Fuente predeterminada */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-image: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Annie_12.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #ceb10dc4;
+        }
+
+        .container {
+            width: 85%;
+            max-width: 800px;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            position: relative;
+            border: 5px solid transparent;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .search-container input {
+            padding: 5px;
+            width: 200px;
+            border-radius: 5px;
+            font-size: 14px;
+            border: 2px solid #eeff00;
+            position: relative;
+            box-shadow: 0 0 5px 2px rgba(255, 102, 0, 0.6);
+            animation: sparkles 1s infinite alternate;
+        }
+
+        @keyframes sparkles {
+            0% {
+                box-shadow: 0 0 5px 2px rgb(255, 238, 0), 
+                            10px 10px 15px rgba(223, 145, 2, 0.74);
+            }
+            100% {
+                box-shadow: 0 0 5px 3px rgb(216, 185, 8),
+                            5px 5px 10px rgba(255, 165, 0, 0.5), 
+                            10px 15px 20px rgba(255, 140, 0, 0.3);
+            }
+        }
+
+        button {
+            background-color: #b9be6d70;
+            color: white;
+            border: 2px solid #eeff00;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            position: relative;
+            box-shadow: 0 0 5px 2px rgb(255, 251, 0);
+            animation: sparkles 1s infinite alternate;
+        }
+
+        button:hover {
+            background-color: #fffb00;
+        }
+
+        .items-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .item {
+            margin: 5px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 0 5px 2px rgb(255, 251, 0);
+            animation: sparkles 1s infinite alternate;
+        }
+
+        .item img {
+            max-width: 70px; /* Cambia a un tamaño más pequeño */
+            max-height: 70px;
+            width: 100px; /* Asegura dimensiones consistentes */
+            height: 100px;
+            border-radius: 5px;
+            border: 2px solid #ff660000;
+            box-sizing: border-box;
+            background-size: cover;
+            display: block;
+        }
+
+        #champion-image {
+            margin-top: 20px;
+            max-width: 700px;
+            max-height: 350px;
+            border-radius: 10px;
+            border: 3px solid #fffb00;
+            box-shadow: 0 0 5px 2px rgb(238, 255, 0);
+            animation: sparkles 1s infinite alternate;
+        }
+
+        .social-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 24px;
+            transition: color 0.3s ease;
+            border: 2px solid transparent;
+            border-image: url('https://path_to_sparkle_image.png') 30 round;
+        }
+
+        .social-links a:hover {
+            color: #fbff04;
+        }
+
+        .champion-info {
+            margin-top: 20px;
+        }
+
+        #champion-apodo {
+            display: block;
+            font-size: 1rem;
+            margin-top: 1px;
+            margin-bottom: 10px;
+            font-style: italic;
+            color: #fafaf8;
+            font-weight: bold; /* Negrita */
+        }
+
+        /* Aplica la fuente personalizada Roboto Slab a estos elementos */
+        h1, #champion-name, #champion-apodo {
+            font-family: 'Roboto Slab', serif; /* Fuente personalizada */
+            font-weight: bold; /* Negrita */
+        }
+
+        /* Borde brillante al título */
+        h1, #champion-name {
+            font-family: 'Roboto Slab', serif; /* Fuente personalizada */
+            font-weight: bold; /* Negrita */
+            font-size: 2.5rem; /* Aumentar el tamaño de la fuente */
+            color: #fff; /* Color del texto */
+            text-shadow: 
+                0 0 3px #fffb00, 
+                0 0 6px #fffb00, 
+                0 0 10px #fffb00, 
+                0 0 15px #ff6600, 
+                0 0 20px #ff6600, 
+                0 0 25px #ff6600; /* Reducir el brillo */
+            animation: glowing 1.5s ease-in-out infinite alternate; /* Animación de brillo */
+        }
+
+        @keyframes glowing {
+            0% {
+                text-shadow: 
+                    0 0 3px #fffb00, 
+                    0 0 6px #fffb00, 
+                    0 0 10px #fffb00, 
+                    0 0 15px #ff6600, 
+                    0 0 20px #ff6600, 
+                    0 0 25px #ff6600;
+            }
+            100% {
+                text-shadow: 
+                    0 0 5px #fffb00, 
+                    0 0 10px #fffb00, 
+                    0 0 15px #fffb00, 
+                    0 0 20px #ffee00, 
+                    0 0 25px #e5ff00, 
+                    0 0 30px #ff6600;
+            }
+        }
+
+        /* Opción para aumentar el tamaño del texto */
+        .champion-name-large, .champion-apodo-large {
+            font-size: 2rem; /* Aumentar el tamaño de la fuente */
+        }
+
+        * {
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="champion-name-large">LEAGUE OF LEGENDS RANDOMIZER</h1>
+        <div class="search-container">
+            <input type="text" id="search-champion" placeholder="Busca un campeón...">
+            <button id="randomize-btn">¡Generar!</button>
+        </div>
+        <p id="champion-name" class="champion-name-large">By: Soy_Blue</p>
+        <span id="champion-apodo" class="champion-apodo-large"></span>
+        <img id="champion-image" alt="" src="" />
+
+        <div class="items-container" id="items-container">
+        </div>
+
+        <div class="social-links">
+            <a href="https://www.youtube.com/@SoyBlueLOL" target="_blank">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://www.twitch.tv/elbluelol" target="_blank">
+                <i class="fab fa-twitch"></i>
+            </a>
+            <a href="https://www.tiktok.com/@elbluelol" target="_blank">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="https://www.instagram.com/elbluelol/" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://x.com/ElBlueLoLx" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://discord.gg/pvunjGtnyB" target="_blank">
+                <i class="fab fa-discord"></i>
+            </a>
+        </div>
+    </div>
+</body>
+
+
+
+    <script>
+        const champions = [
+            { name: "AATROX",apodo: "LA ESPADA DARKIN", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg" },
+    { name:  "AHRI", apodo: "LA VASTALLA DE LAS NUEVE COLAS", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg" },
+    { name: "AKALI", apodo: "LA ASESINA FURTIVA", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Akali_0.jpg" },
+    { name: "AKSHAN", apodo: "EL CENTINELA REBELDE", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Akshan_0.jpg" },
+    { name: "ALISTAR", apodo: "EL MINOTAURO", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Alistar_0.jpg" },
+    { name: "AMUMU", apodo: "LA MOMIA TRISTE", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Amumu_0.jpg" },
+    { name: "ANIVIA", apodo: "LA CRIOFÉNIX", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Anivia_0.jpg" },
+    { name: "ANNIE", apodo: "la Hija de la Oscuridad", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Annie_0.jpg" },
+    { name: "APHELIOS", apodo: "El Arma de los Adeptos", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aphelios_0.jpg" },
+    { name: "ASHE", apodo: "la Arquera de Hielo", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ashe_0.jpg" },
+    { name: "AURELION SOL", apodo: "el Forjador de Estrellas", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/AurelionSol_0.jpg" },
+    { name: "AZIR", apodo: "el Emperador de las Arenas", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Azir_0.jpg" },
+    { name: "BARDO", apodo: "el Guardián Trotamundos", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Bard_0.jpg" },
+    { name: "BEL'VETH", apodo: "la Emperatriz del Vacío", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Belveth_0.jpg" },
+    { name: "BLITZCRANK", apodo: "el Gran Gólem de Vapor", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Blitzcrank_0.jpg" },
+    { name: "BRAND", apodo: "la Venganza Ardiente", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Brand_0.jpg" },
+    { name: "BRAUM", apodo: "el Corazón del Fréljord", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Braum_0.jpg" },
+    { name: "CAITLYN", apodo: "la Sheriff de Piltóver", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Caitlyn_0.jpg" },
+    { name: "CAMILLE", apodo: "la Sombra de Acero", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Camille_0.jpg" },
+    { name: "CASSIOPEIA", apodo: "el Abrazo de la Serpiente", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Cassiopeia_0.jpg" },
+    { name: "CHO'GATH", apodo: "el Terror del Vacío", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Chogath_0.jpg" },
+    { name: "CORKI", apodo: "el Bombardero Osado", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Corki_0.jpg" },
+    { name: "DARIUS", apodo: "la mano de Noxus", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Darius_0.jpg" },
+    { name: "DIANA", apodo: "el Desdén de la Luna", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg" },
+    { name: "DR . MUNDO", apodo: "el Loco de Zaun", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/DrMundo_0.jpg" },
+    { name: "DRAVEN", apodo: "el Glorioso Ejecutor", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Draven_0.jpg" },
+    { name: "EKKO", apodo: "el Joven que Fragmentó el Tiempo", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg" },
+    { name: "ELISE", apodo: "la Reina de las Arañas", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Elise_0.jpg" },
+    { name: "Evelynn", apodo: "Abrazo de la Agonía", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Evelynn_0.jpg" },
+    { name: "Ezreal", apodo: "el Explorador Pródigo", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ezreal_0.jpg" },
+    { name: "Fiddlesticks", apodo: "el Terror Ancestral", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Fiddlesticks_0.jpg" },
+    { name: "Fiora", apodo: "la Gran Duelista", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Fiora_0.jpg" },
+    { name: "Fizz", apodo: "el Bromista de las Mareas", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Fizz_0.jpg" },
+    { name: "Galio", apodo: "el Coloso", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Galio_0.jpg" },
+    { name: "Gangplank", apodo: "el Azote de los Mares", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Gangplank_0.jpg" },
+    { name: "Garen", apodo: "el Poder de Demacia", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Garen_0.jpg" },
+    { name: "Gnar", apodo: "el Eslabón Perdido", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Gnar_0.jpg" },
+    { name: "Gragas", apodo: "el Revoltoso", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Gragas_0.jpg" },
+    { name: "Graves", apodo: "el Forajido", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Graves_0.jpg" },
+    { name: "Gwen", apodo: "La Costurera Sagrada", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Gwen_0.jpg" },
+    { name: "Hecarim", apodo: "la Sombra de la Guerra", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Hecarim_0.jpg" },
+    { name: "Heimerdinger", apodo: "el Venerable Inventor", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Heimerdinger_0.jpg" },
+    { name: "Illaoi", apodo: "la Sacerdotisa del Kraken", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Illaoi_0.jpg" },
+    { name: "Irelia", apodo: "la Cuchilla Danzante", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Irelia_0.jpg" },
+    { name: "Ivern", apodo: "el Árbol Padre", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ivern_0.jpg" },
+    { name: "Janna", apodo: "la Furia de la Tormenta", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Janna_0.jpg" },
+    { name: "Jarvan IV", apodo: "el Ejemplo de Demacia", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/JarvanIV_0.jpg" },
+    { name: "Jax", apodo: "el Maestro de Armas", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jax_0.jpg" },
+    { name: "Ambessa", apodo: "La Matriarca de la Guerra", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ambessa_0.jpg" },
+    { name: "Aurora", apodo: "la Bruja entre Mundos", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aurora_0.jpg" },
+    { name: "Briar", apodo: "el Hambre Contenida", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Briar_0.jpg" },
+    { name: "Hwei", apodo: "el Visionario", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Hwei_0.jpg" },
+    { name: "Jayce", apodo: "el Defensor del Mañana", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jayce_0.jpg" },
+    { name: "Jhin", apodo: "el Virtuoso", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jhin_0.jpg" },
+    { name: "Jinx", apodo: "la Bala Perdida", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jinx_0.jpg" },
+    { name: "Ksante", apodo: "El Orgullo de Nazumah", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/KSante_0.jpg" },
+    { name: "Kaisa", apodo: "La Hija del Vacío", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kaisa_0.jpg" },
+    { name: "Kalista", apodo: "el Espíritu de la Venganza", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kalista_0.jpg" },
+    { name: "Karma", apodo: "la Iluminada", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Karma_0.jpg" },
+    { name: "Karthus", apodo: "el Canto de la Muerte", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Karthus_0.jpg" },
+    { name: "Kassadin", apodo: "el Caminante del Vacío", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kassadin_0.jpg" },
+    { name: "Katarina", apodo: "la Daga Siniestra", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Katarina_0.jpg" },
+    { name: "Kayle", apodo: "la Justiciera", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kayle_0.jpg" },
+    { name: "kayn", apodo: "el Segador Sombrío", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kayn_0.jpg" },
+    { name: "Kennen", apodo: "el Corazón de la Tempestad", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kennen_0.jpg" },
+    { name: "Khazix", apodo: "el Saqueador del Vacío", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Khazix_0.jpg" },
+    { name: "Kindred", apodo: "los Cazadores Eternos", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kindred_0.jpg" },
+    { name: "Kled", apodo: "el Jinete Cascarrabias", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kled_0.jpg" },
+    { name: "Kogmaw", apodo: "la Boca del Abismo", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/KogMaw_0.jpg" },
+    { name: "Leblanc", apodo: "la Maquiavélica", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Leblanc_0.jpg" },
+    { name: "Lee sin", apodo: "el Monje Ciego", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/LeeSin_0.jpg" },
+    { name: "Leona", apodo: "el Radiante Amanecer", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Leona_0.jpg" },
+    { name: "Lillia", apodo: "La Flor Tímida", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Lillia_0.jpg" },
+    { name: "Lissandra", apodo: "la Bruja de Hielo", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Lissandra_0.jpg" },
+    { name: "Lucian", apodo: "el Purificador", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Lucian_0.jpg" },
+    { name: "Lulu", apodo: "La Hechicera Hadística", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Lulu_0.jpg" },
+    { name: "Lux", apodo: "la Dama Luminosa", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Lux_0.jpg" },
+    { name: "Maestro yi", apodo: "la Espada Wuju", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MasterYi_0.jpg" },
+    { name: "Malphite", apodo: "el Fragmento del Monolito", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Malphite_0.jpg" },
+    { name: "Malzahar", apodo: "el Profeta del Vacío", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Malzahar_0.jpg" },
+    { name: "Maokai", apodo: "el Treant Retorcido", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Maokai_0.jpg" },
+    { name: "Milio", apodo: "La Flama Gentil", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Milio_0.jpg" },
+    { name: "Miss fortune", apodo: "la Cazarrecompensas", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MissFortune_0.jpg" },
+    { name: "Mordekaiser", apodo: "el Renacido de Hierro", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Mordekaiser_0.jpg" },
+    { name: "Morgana", apodo: "la Desolada", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Morgana_0.jpg" },
+    { name: "Naafiri", apodo: "la Sabueso de las Cien Mordidas", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Naafiri_0.jpg" },
+    { name: "Nami", apodo: "la Invocadora de Mareas", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Nami_0.jpg" },
+    { name: "Nasus", apodo: "el Curador de las Arenas", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Nasus_0.jpg" },
+    { name: "Nautilus", apodo: "el Titán de las Profundidades", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Nautilus_0.jpg" },
+    { name: "Neeko", apodo: "la Camaleón Curiosa", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Neeko_0.jpg" },
+    { name: "Nidalee", apodo: "la Cazadora Salvaje", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Nidalee_0.jpg" },
+    { name: "Nilah", apodo: "la Alegría Desatada", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Nilah_0.jpg" },
+    { name: "Nocturne", apodo: "la Pesadilla Eterna", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Nocturne_0.jpg" },
+    { name: "Nunu y Willump", apodo: "el Niño y su Yeti", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Nunu_0.jpg" },
+    { name: "Olaf", apodo: "el Berserker", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Olaf_0.jpg" },
+    { name: "Orianna", apodo: "la Doncella Mecánica", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Orianna_0.jpg" },
+    { name: "Ornn", apodo: "El Fuego Debajo de la Montaña", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ornn_0.jpg" },
+    { name: "Pantheon", apodo: "la Lanza Inquebrantable", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Pantheon_0.jpg" },
+    { name: "Poppy", apodo: "la Guardiana del Martillo", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Poppy_0.jpg" },
+    { name: "Pyke", apodo: "el Destripador del Muelle Rojo", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Pyke_0.jpg" },
+    { name: "Qiyana", apodo: "La Emperatriz de los Elementos", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Qiyana_0.jpg" },
+    { name: "Quinn", apodo: "las Alas de Demacia", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Quinn_0.jpg" },
+    { name: "Rakan", apodo: "El Encantador", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Rakan_0.jpg" },
+    { name: "Rammus", apodo: "el Armadurillo", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Rammus_0.jpg" },
+    { name: "Reksai", apodo: "la Excavadora del Vacío", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/RekSai_0.jpg" },
+    { name: "Rell", apodo: "la Doncella de Hierro", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Rell_0.jpg" },
+    { name: "Renata Glasc", apodo: "la Quimobaronesa", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Renata_0.jpg" },
+    { name: "Renekton", apodo: "el Carnicero de las Arenas", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Renekton_0.jpg" },
+    { name: "Rengar", apodo: "el Orgullo Acechante", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Rengar_0.jpg" },
+    { name: "Riven", apodo: "la Desterrada", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Riven_0.jpg" },
+    { name: "Rumble", apodo: "la Amenaza Mecánica", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Rumble_0.jpg" },
+    { name: "Ryze", apodo: "el Mago Rúnico", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ryze_0.jpg" },
+    { name: "Samira", apodo: "la Rosa del Desierto", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Samira_0.jpg" },
+    { name: "Sejuani", apodo: "la Furia del Norte", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Sejuani_0.jpg" },
+    { name: "Senna", apodo: "la Redentora", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Senna_0.jpg" },
+    { name: "Seraphine", apodo: "la Cantante Soñadora", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Seraphine_0.jpg" },
+    { name: "Sett", apodo: "El Jefe", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Sett_0.jpg" },
+    { name: "Shaco", apodo: "el Bufón Siniestro", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Shaco_0.jpg" },
+    { name: "Shen", apodo: "el Ojo del Crepúsculo", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Shen_0.jpg" },
+    { name: "Shyvana", apodo: "la Hija del Dragón", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Shyvana_0.jpg" },
+    { name: "Singed", apodo: "el Químico Loco", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Singed_0.jpg" },
+    { name: "Sion", apodo: "el Coloso no Muerto", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Sion_0.jpg" },
+    { name: "Sivir", apodo: "la Señora de la Batalla", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Sivir_0.jpg" },
+    { name: "Skarner", apodo: "El Soberano Primordial", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Skarner_0.jpg" },
+    { name: "Smolder", apodo: "el Dragoncito Flamante", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Smolder_0.jpg" },
+    { name: "Sona", apodo: "la Virtuosa de las Cuerdas", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Sona_0.jpg" },
+    { name: "Soraka", apodo: "la Hija de las Estrellas", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Soraka_0.jpg" },
+    { name: "Swain", apodo: "el Gran General Noxiano", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Swain_0.jpg" },
+    { name: "Sylas", apodo: "el Usurpador", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Sylas_0.jpg" },
+    { name: "Syndra", apodo: "la Soberana Oscura", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Syndra_0.jpg" },
+    { name: "Tahm Kench", apodo: "El Rey del Río", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/TahmKench_0.jpg" },
+    { name: "Taliyah", apodo: "la Tejedora de Piedra", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Taliyah_0.jpg" },
+    { name: "Talon", apodo: "la Sombra de la Navaja", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Talon_0.jpg" },
+    { name: "Taric", apodo: "el Escudo de Valoran", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Taric_0.jpg" },
+    { name: "Teemo", apodo: "el Explorador Veloz", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Teemo_0.jpg" },
+    { name: "Thresh", apodo: "el Carcelero Implacable", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Thresh_0.jpg" },
+    { name: "Tristana", apodo: "la Artillera Yordle", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Tristana_0.jpg" },
+    { name: "Trundle", apodo: "el Rey de los Troles", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Trundle_0.jpg" },
+    { name: "Tryndamere", apodo: "el Rey Bárbaro", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Tryndamere_0.jpg" },
+    { name: "Twisted Fate", apodo: "el Maestro de las Cartas", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/TwistedFate_0.jpg" },
+    { name: "Twitch", apodo: "la Rata Mutante", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Twitch_0.jpg" },
+    { name: "Udyr", apodo: "el Cambiapieles", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Udyr_0.jpg" },
+    { name: "Urgot", apodo: "el Temerario", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Urgot_0.jpg" },
+    { name: "Varus", apodo: "la Flecha del Castigo", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Varus_0.jpg" },
+    { name: "Vayne", apodo: "la Cazadora Nocturna", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Vayne_0.jpg" },
+    { name: "Veigar", apodo: "el Pequeño Maestro del Mal", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Veigar_0.jpg" },
+    { name: "Velkoz", apodo: "el Ojo del Vacío", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Velkoz_0.jpg" },
+    { name: "Vex", apodo: "la Tristóloga", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Vex_0.jpg" },
+    { name: "V i", apodo: "la Vigilante de Piltóver", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Vi_0.jpg" },
+    { name: "Viego", apodo: "El Rey Arruinado", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Viego_0.jpg" },
+    { name: "Viktor", apodo: "el Heraldo Mecánico", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Viktor_0.jpg" },
+    { name: "Vladimir", apodo: "el Segador Carmesí", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Vladimir_0.jpg" },
+    { name: "Volibear", apodo: "la Tormenta Implacable", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Volibear_0.jpg" },
+    { name: "Warwick", apodo: "la Furia Desatada de Zaun", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Warwick_0.jpg" },
+    { name: "Wukong", apodo: "el Rey de los Monos", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MonkeyKing_0.jpg" },
+    { name: "Xayah", apodo: "la Rebelde", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Xayah_0.jpg" },
+    { name: "Xerath", apodo: "el Mago Ascendente", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Xerath_0.jpg" },
+    { name: "Xin Zhao", apodo: "el Senescal de Demacia", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/XinZhao_0.jpg" },
+    { name: "Yasuo", apodo: "el Imperdonable", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yasuo_0.jpg" },
+    { name: "Yone", apodo: "el Imborrable", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yone_0.jpg" },
+    { name: "Yorick", apodo: "Pastor de Almas", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yorick_0.jpg" },
+    { name: "Yuumi", apodo: "la gatita mágica", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yuumi_0.jpg" },
+    { name: "Zac", apodo: "el Arma Secreta", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Zac_0.jpg" },
+    { name: "Zed", apodo: "el Maestro de las Sombras", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Zed_0.jpg" },
+    { name: "Zeri", apodo: "La chispa de Zaun", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Zeri_0.jpg" },
+    { name: "Zilean", apodo: "el Guardián del Tiempo", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Zilean_0.jpg" },
+    { name: "Ziggs", apodo: "el Experto en Hexplosivos", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ziggs_0.jpg" },
+    { name: "Zoe", apodo: "el Aspecto del Crepúsculo", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Zoe_0.jpg" },
+    { name: "Zyra", apodo: "el Despertar de las Espinas", image: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Zyra_0.jpg" },
+        ];
+
+        const items = {
+            boots: [
+            { name: "Plated Steelcaps", image: "https://ddragon.leagueoflegends.com/cdn/13.1.1/img/item/3047.png" },
+{ name: "Mercury's Treads", image: "https://ddragon.leagueoflegends.com/cdn/13.1.1/img/item/3111.png" },
+{ name: "Ionian Boots of Lucidity", image: "https://ddragon.leagueoflegends.com/cdn/13.1.1/img/item/3158.png" },
+{ name: "Boots of Swiftness", image: "https://ddragon.leagueoflegends.com/cdn/13.1.1/img/item/3009.png" },
+{ name: "Mobility Boots", image: "https://ddragon.leagueoflegends.com/cdn/13.1.1/img/item/3117.png" },
+{ name: "Sorcerer's Shoes", image: "https://ddragon.leagueoflegends.com/cdn/13.1.1/img/item/3020.png" },
+{ name: "Berserker's Greaves", image: "https://ddragon.leagueoflegends.com/cdn/13.1.1/img/item/3006.png" }
+
+                
+            ],
+            legendary: [
+                { name: "Abyssal Mask", image: "https://static.wikia.nocookie.net/leagueoflegends/images/2/22/Abyssal_Mask_item_HD.png/revision/latest/scale-to-width-down/64?cb=20221115195027" },
+                { name: "Archangel's Staff", image: "https://static.wikia.nocookie.net/leagueoflegends/images/c/c9/Archangel%27s_Staff_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201111002421" },
+                { name: "Ardent Censer", image: "https://static.wikia.nocookie.net/leagueoflegends/images/f/fb/Ardent_Censer_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201110215606" },,
+                { name: "Axiom Arc", image: "https://static.wikia.nocookie.net/leagueoflegends/images/b/b2/Axiom_Arc_item_HD.png/revision/latest/scale-to-width-down/64?cb=20211116191653" },
+                { name: "Banshee's Veil", image: "https://static.wikia.nocookie.net/leagueoflegends/images/f/fd/Banshee%27s_Veil_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109210523" },
+                { name: "Black Cleaver", image: "https://static.wikia.nocookie.net/leagueoflegends/images/0/00/Black_Cleaver_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201110220105" },
+                { name: "Blackfire Torch", image: "https://static.wikia.nocookie.net/leagueoflegends/images/8/83/Blackfire_Torch_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240506150426" },
+                { name: "Blade of the Ruined King", image: "https://static.wikia.nocookie.net/leagueoflegends/images/9/9d/Blade_of_the_Ruined_King_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109211240" },
+                { name: "Bloodthirster", image: "https://static.wikia.nocookie.net/leagueoflegends/images/b/b9/Bloodthirster_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240922042553" },
+                { name: "Chempunk Chainsword", image: "https://static.wikia.nocookie.net/leagueoflegends/images/3/32/Chempunk_Chainsword_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201110221734" },
+                { name: "Bloodsong", image: "https://static.wikia.nocookie.net/leagueoflegends/images/d/d7/Bloodsong_item_HD.png/revision/latest/scale-to-width-down/64?cb=20231204214410" },
+                { name: "Celestial Opposition", image: "https://static.wikia.nocookie.net/leagueoflegends/images/f/f8/Celestial_Opposition_item_HD.png/revision/latest/scale-to-width-down/64?cb=20231204214836" },
+                { name: "Cosmic Drive", image: "https://static.wikia.nocookie.net/leagueoflegends/images/a/ab/Cosmic_Drive_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240917004710" },
+                { name: "Cryptbloom", image: "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/0/09/ItemSquareCryptbloom.png/revision/latest?cb=20240201150745" },
+                { name: "Dawncore", image: "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/7/7b/ItemSquareDawncore.png/revision/latest?cb=20240112145652" },
+                { name: "Dead Man's Plate", image: "https://static.wikia.nocookie.net/leagueoflegends/images/5/54/Dead_Man%27s_Plate_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109212711" },
+                { name: "Death's Dance", image: "https://static.wikia.nocookie.net/leagueoflegends/images/7/74/Death%27s_Dance_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240922034453" },
+                { name: "Dream Maker", image: "https://static.wikia.nocookie.net/leagueoflegends/images/f/fd/Dream_Maker_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240827150125" },
+                { name: "Echoes of Helia", image: "https://static.wikia.nocookie.net/leagueoflegends/images/4/4d/Echoes_of_Helia_item_HD.png/revision/latest/scale-to-width-down/64?cb=20230518120814" },
+                { name: "Eclipse", image: "https://static.wikia.nocookie.net/leagueoflegends/images/c/c2/Eclipse_item.png/revision/latest?cb=20201118204016" },
+                { name: "Edge of Night", image: "https://static.wikia.nocookie.net/leagueoflegends/images/b/b2/Edge_of_Night_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201110223151" },
+                { name: "Essence Reaver", image: "https://static.wikia.nocookie.net/leagueoflegends/images/2/2a/Essence_Reaver_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109214442" },
+                { name: "Experimental Hexplate", image: "https://static.wikia.nocookie.net/leagueoflegends/images/f/fc/Experimental_Hexplate_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240916221318" },
+                { name: "Fimbulwinter", image: "https://static.wikia.nocookie.net/leagueoflegends/images/e/ea/Fimbulwinter_item_HD.png/revision/latest/scale-to-width-down/64?cb=20211116191950" },
+                { name: "Force of Nature", image: "https://static.wikia.nocookie.net/leagueoflegends/images/b/bf/Force_of_Nature_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109212810" },
+                { name: "Frozen Heart", image: "https://static.wikia.nocookie.net/leagueoflegends/images/8/86/Frozen_Heart_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240917003558" },
+                { name: "Guardian Angel", image: "https://static.wikia.nocookie.net/leagueoflegends/images/c/c4/Guardian_Angel_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109213832" },
+                { name: "Guinsoo's Rageblade", image: "https://static.wikia.nocookie.net/leagueoflegends/images/6/64/Guinsoo%27s_Rageblade_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201110230134" },
+                { name: "Heartsteel", image: "https://static.wikia.nocookie.net/leagueoflegends/images/8/87/Heartsteel_item_HD.png/revision/latest/scale-to-width-down/64?cb=20221115195510" },
+                { name: "Hextech Rocketbelt", image: "https://static.wikia.nocookie.net/leagueoflegends/images/d/df/Hextech_Rocketbelt_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240922043316" },
+                { name: "Hollow Radiance", image: "https://static.wikia.nocookie.net/leagueoflegends/images/e/e7/Hollow_Radiance_item_HD.png/revision/latest/scale-to-width-down/64?cb=20231205225746" },
+                { name: "Horizon Focus", image: "https://static.wikia.nocookie.net/leagueoflegends/images/e/e8/Horizon_Focus_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240917004232" },
+                { name: "Hubris", image: "https://static.wikia.nocookie.net/leagueoflegends/images/7/7d/Hubris_item_HD.png/revision/latest/scale-to-width-down/64?cb=20231204214849" },
+                { name: "Hullbreaker", image: "https://static.wikia.nocookie.net/leagueoflegends/images/e/e0/Hullbreaker_item_HD.png/revision/latest/scale-to-width-down/64?cb=20210824190552" },
+                { name: "Iceborn Gauntlet", image: "https://static.wikia.nocookie.net/leagueoflegends/images/8/8d/Iceborn_Gauntlet_item_HD.png/revision/latest/scale-to-width-down/64?cb=20221117180527" },
+                { name: "Immortal Shieldbow", image: "https://static.wikia.nocookie.net/leagueoflegends/images/2/2b/Immortal_Shieldbow_item.png/revision/latest?cb=20201118205028" },
+                { name: "Imperial Mandate", image: "https://static.wikia.nocookie.net/leagueoflegends/images/b/bc/Imperial_Mandate_item.png/revision/latest?cb=20201104212814" },
+                { name: "Infinity Edge", image: "https://static.wikia.nocookie.net/leagueoflegends/images/a/aa/Infinity_Edge_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109213737" },
+                { name: "Jak'Sho, The Protean", image: "https://static.wikia.nocookie.net/leagueoflegends/images/4/4a/Jak%27Sho%2C_The_Protean_item_HD.png/revision/latest/scale-to-width-down/64?cb=20221115193817" },
+                { name: "Kaenic Rookern", image: "https://static.wikia.nocookie.net/leagueoflegends/images/a/a8/Kaenic_Rookern_item_HD.png/revision/latest/scale-to-width-down/64?cb=20231204214851" },
+                { name: "Knight's Vow", image: "https://static.wikia.nocookie.net/leagueoflegends/images/9/90/Knight%27s_Vow_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109213037" },
+                { name: "Kraken Slayer", image: "https://static.wikia.nocookie.net/leagueoflegends/images/e/e9/Kraken_Slayer_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201110232124" },
+                { name: "Liandry's Torment", image: "https://static.wikia.nocookie.net/leagueoflegends/images/d/d8/Liandry%27s_Torment_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240922043519" },
+                { name: "Lich Bane", image: "https://static.wikia.nocookie.net/leagueoflegends/images/8/8d/Lich_Bane_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109211107" },
+                { name: "Locket of the Iron Solari", image: "https://static.wikia.nocookie.net/leagueoflegends/images/9/95/Locket_of_the_Iron_Solari_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109212528" },
+                { name: "Lord Dominik's Regards", image: "https://static.wikia.nocookie.net/leagueoflegends/images/3/3c/Lord_Dominik%27s_Regards_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109214027" },
+                { name: "Luden's Companion", image: "https://static.wikia.nocookie.net/leagueoflegends/images/f/f4/Luden%27s_Companion_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240916225518" },
+                { name: "Malignance", image: "https://static.wikia.nocookie.net/leagueoflegends/images/7/7a/Malignance_item_HD.png/revision/latest/scale-to-width-down/64?cb=20231204214853" },
+                { name: "Manamune", image: "https://static.wikia.nocookie.net/leagueoflegends/images/3/34/Manamune_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240922042507" },
+                { name: "Maw of Malmortius", image: "https://static.wikia.nocookie.net/leagueoflegends/images/5/51/Maw_of_Malmortius_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240827151928" },
+                { name: "Mejai's Soulstealer", image: "https://static.wikia.nocookie.net/leagueoflegends/images/8/88/Mejai%27s_Soulstealer_item_HD.png/revision/latest/scale-to-width-down/64?cb=20221103165010" },
+                { name: "Mercurial Scimitar", image: "https://static.wikia.nocookie.net/leagueoflegends/images/4/46/Mercurial_Scimitar_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201110234009" },
+                { name: "Mikael's Blessing", image: "https://static.wikia.nocookie.net/leagueoflegends/images/e/e5/Mikael%27s_Blessing_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240922034151" },
+                { name: "Moonstone Renewer", image: "https://static.wikia.nocookie.net/leagueoflegends/images/d/dd/Moonstone_Renewer_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201110234334" },
+                { name: "Morellonomicon", image: "https://static.wikia.nocookie.net/leagueoflegends/images/a/a1/Morellonomicon_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201110234439" },
+                { name: "Mortal Reminder", image: "https://static.wikia.nocookie.net/leagueoflegends/images/f/f3/Mortal_Reminder_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201110234613" },
+                { name: "Nashor's Tooth", image: "https://static.wikia.nocookie.net/leagueoflegends/images/8/82/Nashor%27s_Tooth_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201110234914" },
+                { name: "Navori Flickerblade", image: "https://static.wikia.nocookie.net/leagueoflegends/images/e/e7/Navori_Flickerblade_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240506150432" },
+                { name: "Opportunity", image: "https://static.wikia.nocookie.net/leagueoflegends/images/3/30/Opportunity_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240827150210" },
+                { name: "Overlord's Bloodmail", image: "https://static.wikia.nocookie.net/leagueoflegends/images/8/8d/Overlord%27s_Bloodmail_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240511195413" },
+                { name: "Phantom Dancer", image: "https://static.wikia.nocookie.net/leagueoflegends/images/5/5e/Phantom_Dancer_item_HD.png/revision/latest/scale-to-width-down/64?cb=20230613182250" },
+                { name: "Profane Hydra", image: "https://static.wikia.nocookie.net/leagueoflegends/images/4/40/Profane_Hydra_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240915025338" },
+                { name: "Rabadon's Deathcap", image: "https://static.wikia.nocookie.net/leagueoflegends/images/e/e4/Rabadon%27s_Deathcap_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240918170301" },
+                { name: "Randuin's Omen", image: "https://static.wikia.nocookie.net/leagueoflegends/images/d/df/Randuin%27s_Omen_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240917003716" },
+                { name: "Rapid Firecannon", image: "https://static.wikia.nocookie.net/leagueoflegends/images/4/48/Rapid_Firecannon_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109214154" },
+                { name: "Ravenous Hydra", image: "https://static.wikia.nocookie.net/leagueoflegends/images/9/90/Ravenous_Hydra_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109211614" },
+                { name: "Redemption", image: "https://static.wikia.nocookie.net/leagueoflegends/images/e/e6/Redemption_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201111001608" },
+                { name: "Riftmaker", image: "https://static.wikia.nocookie.net/leagueoflegends/images/7/7a/Riftmaker_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240918173916" },
+                { name: "Rod of Ages", image: "https://static.wikia.nocookie.net/leagueoflegends/images/4/4f/Rod_of_Ages_item_HD.png/revision/latest/scale-to-width-down/64?cb=20221115195303" },
+                { name: "Runaan's Hurricane", image: "https://static.wikia.nocookie.net/leagueoflegends/images/f/ff/Runaan%27s_Hurricane_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201111001820" },
+                { name: "Rylai's Crystal Scepter", image: "https://static.wikia.nocookie.net/leagueoflegends/images/d/d4/Rylai%27s_Crystal_Scepter_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240827151832" },
+                { name: "Seraph's Embrace", image: "https://static.wikia.nocookie.net/leagueoflegends/images/9/92/Seraph%27s_Embrace_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201111002614" },
+                { name: "Serpent's Fang", image: "https://static.wikia.nocookie.net/leagueoflegends/images/1/14/Serpent%27s_Fang_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240917005031" },
+                { name: "Serylda's Grudge", image: "https://static.wikia.nocookie.net/leagueoflegends/images/1/12/Serylda%27s_Grudge_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109213226" },
+                { name: "Shadowflame", image: "https://static.wikia.nocookie.net/leagueoflegends/images/e/e4/Shadowflame_item_HD.png/revision/latest/scale-to-width-down/64?cb=20211116192225" },
+                { name: "Shurelya's Battlesong", image: "https://static.wikia.nocookie.net/leagueoflegends/images/f/f1/Shurelya%27s_Battlesong_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240922044223" },
+                { name: "Solstice Sleigh", image: "https://static.wikia.nocookie.net/leagueoflegends/images/3/32/Solstice_Sleigh_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240827150430" },
+                { name: "Spear of Shojin", image: "https://static.wikia.nocookie.net/leagueoflegends/images/8/84/Spear_of_Shojin_item_HD.png/revision/latest/scale-to-width-down/64?cb=20221115194227" },
+                { name: "Spirit Visage", image: "https://static.wikia.nocookie.net/leagueoflegends/images/b/b0/Spirit_Visage_item_HD.png/revision/latest/scale-to-width-down/64?cb=20221223051628" },
+                { name: "Staff of Flowing Water", image: "https://static.wikia.nocookie.net/leagueoflegends/images/9/9e/Staff_of_Flowing_Water_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109214821" },
+                { name: "Statikk Shiv", image: "https://static.wikia.nocookie.net/leagueoflegends/images/4/4f/Statikk_Shiv_item_HD.png/revision/latest/scale-to-width-down/64?cb=20230518120817" },
+                { name: "Sterak's Gage", image: "https://static.wikia.nocookie.net/leagueoflegends/images/0/0a/Sterak%27s_Gage_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109220051" },
+                { name: "Stormsurge", image: "https://static.wikia.nocookie.net/leagueoflegends/images/3/3e/Stormsurge_item_HD.png/revision/latest/scale-to-width-down/64?cb=20231204214910" },
+                { name: "Stridebreaker", image: "https://static.wikia.nocookie.net/leagueoflegends/images/7/7a/Stridebreaker_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201111004515" },
+                { name: "Sundered Sky", image: "https://static.wikia.nocookie.net/leagueoflegends/images/8/86/Sundered_Sky_item_HD.png/revision/latest/scale-to-width-down/64?cb=20231204214913" },
+                { name: "Sunfire Aegis", image: "https://static.wikia.nocookie.net/leagueoflegends/images/e/e4/Sunfire_Aegis_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240916221143" },
+                { name: "Terminus", image: "https://static.wikia.nocookie.net/leagueoflegends/images/d/df/Terminus_item_HD.png/revision/latest/scale-to-width-down/64?cb=20231204214915" },
+                { name: "The Collector", image: "https://static.wikia.nocookie.net/leagueoflegends/images/5/52/The_Collector_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240922034639" },
+                { name: "Thornmail", image: "https://static.wikia.nocookie.net/leagueoflegends/images/c/ca/Thornmail_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201111005023" },
+                { name: "Titanic Hydra", image: "https://static.wikia.nocookie.net/leagueoflegends/images/8/89/Titanic_Hydra_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109211812" },
+                { name: "Trailblazer", image: "https://static.wikia.nocookie.net/leagueoflegends/images/2/2e/Trailblazer_item_HD.png/revision/latest/scale-to-width-down/64?cb=20231204214919" },
+                { name: "Trinity Force", image: "https://static.wikia.nocookie.net/leagueoflegends/images/9/9e/Trinity_Force_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201111011055" },
+                { name: "Umbral Glaive", image: "https://static.wikia.nocookie.net/leagueoflegends/images/0/05/Umbral_Glaive_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109213521" },
+                { name: "Unending Despair", image: "https://static.wikia.nocookie.net/leagueoflegends/images/9/9d/Unending_Despair_item_HD.png/revision/latest/scale-to-width-down/64?cb=20231204214923" },
+                { name: "Vigilant Wardstone", image: "https://static.wikia.nocookie.net/leagueoflegends/images/c/cd/Vigilant_Wardstone_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201111011537" },
+                { name: "Void Staff", image: "https://static.wikia.nocookie.net/leagueoflegends/images/1/14/Void_Staff_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109210758" },
+                { name: "Voltaic Cyclosword", image: "https://static.wikia.nocookie.net/leagueoflegends/images/4/4b/Voltaic_Cyclosword_item_HD.png/revision/latest/scale-to-width-down/64?cb=20231204214925" },
+                { name: "Warmog's Armor", image: "https://static.wikia.nocookie.net/leagueoflegends/images/6/6e/Warmog%27s_Armor_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240918170750" },
+                { name: "Winter's Approach", image: "https://static.wikia.nocookie.net/leagueoflegends/images/1/10/Winter%27s_Approach_item_HD.png/revision/latest/scale-to-width-down/64?cb=20211116191607" },
+                { name: "Wit's End", image: "https://static.wikia.nocookie.net/leagueoflegends/images/4/48/Wit%27s_End_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201111012107" },
+                { name: "Youmuu's Ghostblade", image: "https://static.wikia.nocookie.net/leagueoflegends/images/f/f7/Youmuu%27s_Ghostblade_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201111012227" },
+                { name: "Yun Tal Wildarrows", image: "https://static.wikia.nocookie.net/leagueoflegends/images/e/eb/Yun_Tal_Wildarrows_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240506150444" },
+                { name: "Zaz'Zak's Realmspike", image: "https://static.wikia.nocookie.net/leagueoflegends/images/0/03/Zaz%27Zak%27s_Realmspike_item_HD.png/revision/latest/scale-to-width-down/64?cb=20231204214930" },
+                { name: "Zeke's Convergence", image: "https://static.wikia.nocookie.net/leagueoflegends/images/0/0b/Zeke%27s_Convergence_item_HD.png/revision/latest/scale-to-width-down/64?cb=20240109220207" },
+                { name: "Zhonya's Hourglass", image: "https://static.wikia.nocookie.net/leagueoflegends/images/3/31/Zhonya%27s_Hourglass_item_HD.png/revision/latest/scale-to-width-down/64?cb=20201111012842" },
+            ]
+        };
+
+        const championNameEl = document.getElementById("champion-name");
+        const championImageEl = document.getElementById("champion-image");
+        const championApodoEl = document.getElementById("champion-apodo");
+        const itemsContainer = document.getElementById("items-container");
+        const searchInput = document.getElementById("search-champion");
+
+        document.getElementById("randomize-btn").addEventListener("click", () => {
+            const randomChampion = champions[Math.floor(Math.random() * champions.length)];
+            championNameEl.textContent = randomChampion.name;
+            championImageEl.src = randomChampion.image;
+            championApodoEl.textContent = `"${randomChampion.apodo}"`;
+
+            itemsContainer.innerHTML = "";
+            const randomBoots = items.boots[Math.floor(Math.random() * items.boots.length)];
+            const availableLegendaryItems = [...items.legendary];
+            const randomLegendaryItems = [];
+            for (let i = 0; i < 6; i++) {
+                const randomIndex = Math.floor(Math.random() * availableLegendaryItems.length);
+                randomLegendaryItems.push(availableLegendaryItems.splice(randomIndex, 1)[0]);
+            }
+
+            const randomItems = [...randomLegendaryItems];
+            randomItems.splice(1, 0, randomBoots);
+
+            randomItems.forEach(item => {
+                const itemDiv = document.createElement("div");
+                itemDiv.className = "item";
+                itemDiv.innerHTML = `<img src="${item.image}" alt="${item.name}" title="${item.name}">`;
+                itemsContainer.appendChild(itemDiv);
+            });
+        });
+
+        searchInput.addEventListener("input", () => {
+            const query = searchInput.value.toLowerCase();
+            const result = champions.find(champion => champion.name.toLowerCase().includes(query));
+            if (result) {
+                championNameEl.textContent = result.name;
+                championImageEl.src = result.image;
+                championApodoEl.textContent = `"${result.apodo}"`;
+            }
+        });
+    </script>
+</body>
+</html>
