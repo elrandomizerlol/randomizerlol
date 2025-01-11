@@ -535,51 +535,60 @@
         const championApodoEl = document.getElementById("champion-apodo");
         const itemsContainer = document.getElementById("items-container");
         const searchInput = document.getElementById("search-champion");
+        const randomizeBtn = document.getElementById("randomize-btn");
 
-        document.getElementById("randomize-btn").addEventListener("click", () => {
-            const randomChampion = champions[Math.floor(Math.random() * champions.length)];
-            championNameEl.textContent = randomChampion.name;
-            championImageEl.src = randomChampion.image;
-            championApodoEl.textContent = `"${randomChampion.apodo}"`;
-
+        function generateItems() {
             itemsContainer.innerHTML = "";
 
             const randomBoots = items.boots[Math.floor(Math.random() * items.boots.length)];
             const availableLegendaryItems = [...items.legendary];
 
-            // Asegurar que haya suficientes ítems legendarios
             if (availableLegendaryItems.length < 5) {
                 console.error("No hay suficientes ítems legendarios disponibles.");
                 return;
             }
 
-            // Selecciona aleatoriamente 5 ítems legendarios
             const randomLegendaryItems = [];
             for (let i = 0; i < 5; i++) {
                 const randomIndex = Math.floor(Math.random() * availableLegendaryItems.length);
                 randomLegendaryItems.push(availableLegendaryItems.splice(randomIndex, 1)[0]);
             }
 
-            // Coloca las botas en la segunda posición
             const randomItems = [...randomLegendaryItems];
             randomItems.splice(1, 0, randomBoots);
 
-            // Asegurar que siempre se generen 6 ítems
             randomItems.forEach(item => {
                 const itemDiv = document.createElement("div");
                 itemDiv.className = "item";
                 itemDiv.innerHTML = `<img src="${item.image}" alt="${item.name}" title="${item.name}">`;
                 itemsContainer.appendChild(itemDiv);
             });
-        });
+        }
 
-        searchInput.addEventListener("input", () => {
-            const query = searchInput.value.toLowerCase();
-            const result = champions.find(champion => champion.name.toLowerCase().includes(query));
-            if (result) {
-                championNameEl.textContent = result.name;
-                championImageEl.src = result.image;
-                championApodoEl.textContent = `"${result.apodo}"`;
+        function randomizeChampion() {
+            const randomChampion = champions[Math.floor(Math.random() * champions.length)];
+            championNameEl.textContent = randomChampion.name;
+            championImageEl.src = randomChampion.image;
+            championApodoEl.textContent = `"${randomChampion.apodo}"`;
+            generateItems();
+        }
+
+        randomizeBtn.addEventListener("click", () => {
+            if (searchInput.value.trim()) {
+                const query = searchInput.value.trim().toLowerCase();
+                const result = champions.find(champion => champion.name.toLowerCase().includes(query));
+
+                if (result) {
+                    championNameEl.textContent = result.name;
+                    championImageEl.src = result.image;
+                    championApodoEl.textContent = `"${result.apodo}"`;
+                    generateItems();
+                } else {
+                    alert("Campeón no encontrado. Se generará un campeón aleatorio.");
+                    randomizeChampion();
+                }
+            } else {
+                randomizeChampion();
             }
         });
     </script>
